@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Stuff.dart';
+import 'stuff_card.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -26,6 +27,7 @@ class _StuffListState extends State<StuffList> {
     Stuff(name: 'Stuff name 2', text: 'Stuff text 2'),
     Stuff(name: 'Stuff name 3', text: 'Stuff text 3')
   ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,17 @@ class _StuffListState extends State<StuffList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: stuffList.map((item) => Text('${item.name} - ${item.text}'))
-            .toList(),
+        children: stuffList.map((item) => StuffCard(
+            stuff: item,
+            delete: (){
+              setState(() {
+                stuffList.remove(item);
+              });
+          }
+        )).toList(),
       ),
     );
   }
 }
+
+
